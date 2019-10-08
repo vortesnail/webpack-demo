@@ -1,12 +1,10 @@
-import './style.css';
+// import "@babel/polyfill";
 
-const btn = document.createElement('button');
-btn.innerHTML = '新增';
-document.body.appendChild(btn);
+const arr = [
+  new Promise(() => {}),
+  new Promise(() => {})
+]
 
-btn.onclick = function() {
-  const div = document.createElement('div');
-  div.innerHTML = 'item';
-  document.body.appendChild(div);
-}
-
+arr.map(item => {
+  console.log(item);
+})
