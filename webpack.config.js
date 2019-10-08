@@ -34,7 +34,7 @@ module.exports = {
           loader: 'css-loader',
           options: {
             importLoaders: 2,  // 重走下面的两个loader
-            modules: true,  // 开启css的模块化打包
+            // modules: true,  // 开启css的模块化打包
           }
         }, // 整合 css 文件, 配置写法
         'sass-loader', // 翻译 sass 为 css
