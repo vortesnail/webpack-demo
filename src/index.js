@@ -1,3 +1,12 @@
-// 故意拼错，使用 sourceMap定位到源文件错误位置
-// 若不用的话，在浏览器控制台输出的错误是定位到打包之后的 main.js 中的错误位置
-console.log('hello webpack, I m coming!!!!');
+import './style.css';
+
+const btn = document.createElement('button');
+btn.innerHTML = '新增';
+document.body.appendChild(btn);
+
+btn.onclick = function() {
+  const div = document.createElement('div');
+  div.innerHTML = 'item';
+  document.body.appendChild(div);
+}
+

@@ -1,6 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -17,6 +18,8 @@ module.exports = {
     port: 8000,
     // 自动打开一个浏览器
     open: true,
+    hot: true,
+    hotOnly: true,
   },
   module: {
     rules: [{
@@ -60,9 +63,13 @@ module.exports = {
     }]
   },
   // plugin 可以在 webpack 运行到某个过程的时候，做一些事情
-  plugins: [new HtmlWebpackPlugin({
-    template: 'src/index.html'
-  }), new CleanWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }), 
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
 
   output: {
     filename: '[name].js',

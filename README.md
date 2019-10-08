@@ -23,6 +23,8 @@ module.exports = {
     port: 8000,
     // 自动打开一个浏览器
     open: true,
+    hot: true,
+    hotOnly: true,
   },
   module: {
     rules: [{
