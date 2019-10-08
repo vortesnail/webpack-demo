@@ -2,6 +2,7 @@
 webpack learning note
 
 ## 配置->devtool 之下的 source-map 使用
+webpack.config.js
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
@@ -15,7 +16,14 @@ module.exports = {
   entry: {
     main: './src/index.js'
   },
-
+  devServer: {
+    // 为 dist 文件开一个服务器
+    contentBase: path.join(__dirname, "dist"),
+    // 定义端口
+    port: 8000,
+    // 自动打开一个浏览器
+    open: true,
+  },
   module: {
     rules: [{
       test: /\.(jpg|png|gif)$/,
@@ -67,5 +75,13 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   }
 }
+```
 
+package.json
+```js
+  "scripts": {
+    "bundle": "webpack",
+    "watch": "webpack --watch",
+    "start": "webpack-dev-server"
+  },
 ```

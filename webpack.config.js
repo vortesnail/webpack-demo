@@ -10,7 +10,14 @@ module.exports = {
   entry: {
     main: './src/index.js'
   },
-
+  devServer: {
+    // 为 dist 文件开一个服务器
+    contentBase: path.join(__dirname, "dist"),
+    // 定义端口
+    port: 8000,
+    // 自动打开一个浏览器
+    open: true,
+  },
   module: {
     rules: [{
       test: /\.(jpg|png|gif)$/,
