@@ -1,7 +1,7 @@
 # webpack-demo
 webpack learning note
 
-## 配置->devtool 之下的 source-map 使用
+## 开发中 Server(devServer)
 webpack.config.js
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
