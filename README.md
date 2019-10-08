@@ -1,12 +1,13 @@
 # webpack-demo
 webpack learning note
 
-## 开发中 Server(devServer)
+## babel 的配置
 webpack.config.js
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   mode: 'development',
@@ -28,6 +29,29 @@ module.exports = {
   },
   module: {
     rules: [{
+      test: /\.js$/,
+      // 如果 js 文件在 node_modules 中，就不使用 babel-loader
+      exclude: /node_modules/,
+      loader: "babel-loader",
+      // options: {
+      //   // presets: [["@babel/preset-env", {
+      //   //   // 大于 chrome 67 版本无需用到 preset-env
+      //   //   targets: {
+      //   //     chrome: '67'
+      //   //   },
+      //   //   // 根据代码逻辑中用到的 ES6+语法进行方法的导入，而不是全部导入
+      //   //   useBuiltIns: 'usage'
+      //   // }]]
+      //   "plugins": [["@babel/plugin-transform-runtime", {
+      //     "absoluteRuntime": false,
+      //     "corejs": 2,
+      //     "helpers": true,
+      //     "regenerator": true,
+      //     "useESModules": false
+      //   }]]
+      // }
+      // 以上代码已放入 .babelrc 这个文件中，无需引入自动执行
+    }, {
       test: /\.(jpg|png|gif)$/,
       use: {
         // path-loader 能做的 url-loader 也能做
@@ -42,10 +66,10 @@ module.exports = {
           limit: 204800
         }
       }
-    },{
+    }, {
       test: /\.css$/,
       use: ['style-loader', 'css-loader']
-    },{
+    }, {
       test: /\.scss$/,
       // loader 的处理顺序从下到上
       use: [
@@ -60,7 +84,7 @@ module.exports = {
         'sass-loader', // 翻译 sass 为 css
         'postcss-loader' // 厂商前缀
       ]
-    },{
+    }, {
       test: /\.(eot|ttf|svg|woff|woff2)$/,
       use: {
         loader: 'file-loader'
@@ -68,9 +92,13 @@ module.exports = {
     }]
   },
   // plugin 可以在 webpack 运行到某个过程的时候，做一些事情
-  plugins: [new HtmlWebpackPlugin({
-    template: 'src/index.html'
-  }), new CleanWebpackPlugin()],
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: 'src/index.html'
+    }),
+    new CleanWebpackPlugin(),
+    new webpack.HotModuleReplacementPlugin()
+  ],
 
   output: {
     filename: '[name].js',
@@ -79,11 +107,21 @@ module.exports = {
 }
 ```
 
-package.json
+.babelrc
 ```js
-  "scripts": {
-    "bundle": "webpack",
-    "watch": "webpack --watch",
-    "start": "webpack-dev-server"
-  },
+{
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime", 
+      {
+        "absoluteRuntime": false,
+        "corejs": 2,
+        "helpers": true,
+        "regenerator": true,
+        "useESModules": false
+      }
+    ]
+  ]
+}
+
 ```
