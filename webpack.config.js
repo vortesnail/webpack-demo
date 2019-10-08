@@ -4,10 +4,12 @@ console.log(CleanWebpackPlugin)
 const path = require('path');
 
 module.exports = {
-  mode: 'production',
+  mode: 'development',
+  devtool: 'cheap-module-eval-source-map',
+  // mode: 'production',
+  // devtool: 'cheap-module-source-map',
   entry: {
-    main: './src/index.js',
-    sub: './src/index.js',
+    main: './src/index.js'
   },
 
   module: {
@@ -57,7 +59,6 @@ module.exports = {
   }), new CleanWebpackPlugin()],
 
   output: {
-    publicPath: 'http://cdn.com.cn',
     filename: '[name].js',
     path: path.resolve(__dirname, 'dist'),
   }
