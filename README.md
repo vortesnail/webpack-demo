@@ -1,7 +1,7 @@
 # webpack-demo
 webpack learning note
 
-## babel 的配置
+## react 的配置
 webpack.config.js
 ```js
 const HtmlWebpackPlugin = require('html-webpack-plugin');
@@ -110,17 +110,17 @@ module.exports = {
 .babelrc
 ```js
 {
-  "plugins": [
+  "presets": [
     [
-      "@babel/plugin-transform-runtime", 
+      "@babel/preset-env",
       {
-        "absoluteRuntime": false,
-        "corejs": 2,
-        "helpers": true,
-        "regenerator": true,
-        "useESModules": false
+        "targets": {
+          "chrome": "67"
+        },
+        "useBuiltIns": "usage"
       }
-    ]
+    ],
+    "@babel/preset-react"
   ]
 }
 

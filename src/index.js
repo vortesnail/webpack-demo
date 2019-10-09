@@ -1,10 +1,14 @@
-// import "@babel/polyfill";
+import "@babel/preset-env";
 
-const arr = [
-  new Promise(() => {}),
-  new Promise(() => {})
-]
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 
-arr.map(item => {
-  console.log(item);
-})
+class App extends Component {
+  render() {
+    return (
+      <div>Hello React</div>
+    )
+  }
+}
+
+ReactDOM.render(<App />, document.querySelector('.root'))
